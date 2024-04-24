@@ -14,6 +14,10 @@ const TaskSchema = new Schema({
     type: Date,
     required: true
   },
+  type: {
+    type: String,
+    required: true,
+  },
   creator:{
     type: Schema.Types.ObjectId,
     ref: 'User',

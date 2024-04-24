@@ -1,14 +1,16 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const dbURI =
-  "mongodb+srv://padekuyooro:Alaba0685@my-tutorial.gmfl1vm.mongodb.net/?retryWrites=true&w=majority&appName=My-Tutorial";
+
+const dbURI = process.env.DB;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/task");
 const profileRoutes = require("./routes/profile");
+const stickyWallRoutes = require("./routes/stickywall");
 mongoose.connect(dbURI);
 app.use(bodyParser.json());
 
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
 app.use(taskRoutes);
 app.use("/auth", authRoutes);
 app.use(profileRoutes);
+app.use(stickyWallRoutes);
 app.use((error, req, res, next) => {
   console.log(error);
   const status = error.statusCode || 500;

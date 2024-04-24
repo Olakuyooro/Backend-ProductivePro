@@ -27,10 +27,14 @@ const UserSchema = new Schema({
       ref: "Task",
     },
   ],
+  stickyWalls: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "StickyWall",
+    },
+  ],
 });
 
+const User = mongoose.model("users", UserSchema);
 
-  
-  const User = mongoose.model("users", UserSchema);
-  
-  module.exports = User;
+module.exports = User;

@@ -20,6 +20,7 @@ exports.createTask = async (req, res, next) => {
     const date = req.body.date;
     const title = req.body.title;
     const description = req.body.description;
+    const type = req.body.type;
     const creator = req.userId;
 
     console.log("Received data:", { date, title, description, creator });

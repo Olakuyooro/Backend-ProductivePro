@@ -29,6 +29,7 @@ exports.createTask = async (req, res, next) => {
       title: title,
       description: description,
       date: date,
+      type:type,
       creator: creator,
     });
 

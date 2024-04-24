@@ -13,7 +13,6 @@ const profileRoutes = require("./routes/profile");
 const stickyWallRoutes = require("./routes/stickywall");
 mongoose.connect(dbURI);
 app.use(bodyParser.json());
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

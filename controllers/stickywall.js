@@ -58,3 +58,32 @@ exports.getStickyWall = async (req, res, next) => {
     res.status(500).json({ error: "An error occurred while fetching tasks" });
   }
 };
+
+exports.deleteSticky = async (req, res, next) => {
+  const stickyId = req.params.stickyId;
+  try {
+    const sticky = await StickyWall.findById(taskId);
+    if (!sticky) {
+      const error = new Error("Could not find sticky wall.");
+      error.statusCode = 404;
+      throw error;
+    }
+    if (StickyWall.creator.toString() !== req.userId) {
+      const error = new Error("Not authorized!");
+      error.statusCode = 403;
+      throw error;
+    }
+    const result = await StickyWall.findByIdAndDelete(stickyId);
+
+    const user = await User.findById(req.userId);
+
+    user.stickyWalls.pull(stickyId);
+    await user.save();
+    res.status(200).json({ message: "Deleted task." });
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};

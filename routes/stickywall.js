@@ -18,4 +18,6 @@ router.post(
   stickyWallController.createStickyWall
 );
 
+router.delete("/delete-stickywall", isAuth, stickyWallController.deleteSticky);
+
 module.exports = router;

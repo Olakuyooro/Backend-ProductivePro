@@ -15,6 +15,7 @@ const stickyWallRoutes = require("./routes/stickywall");
 mongoose.connect(dbURI);
 app.use(bodyParser.json());
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://productive-pro-beta.vercel.app');
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",

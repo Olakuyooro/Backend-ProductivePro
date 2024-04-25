@@ -7,7 +7,6 @@ const swaggerJSDoc = require("./routes/books")
 
 const dbURI = process.env.DB;
 const bodyParser = require("body-parser");
-const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/task");

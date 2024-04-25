@@ -3,19 +3,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const swaggerUI = require("swagger-ui-express");
-const swaggerJSDoc = require("./routes/books");
+const swaggerJSDoc = require("./routes/books")
 
 const dbURI = process.env.DB;
 const bodyParser = require("body-parser");
 const cors = require("cors");
-app.use(cors);
-app.use(bodyParser.json());
+
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/task");
 const profileRoutes = require("./routes/profile");
 const stickyWallRoutes = require("./routes/stickywall");
 mongoose.connect(dbURI);
-
+app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

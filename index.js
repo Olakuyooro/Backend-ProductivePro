@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const app = express();
 const swaggerUI = require("swagger-ui-express");
 const swaggerJSDoc = require("./routes/books")
+const cors = require("cors")
 
 const dbURI = process.env.DB;
 const bodyParser = require("body-parser");
-
+app.use(cors())
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/task");
 const profileRoutes = require("./routes/profile");

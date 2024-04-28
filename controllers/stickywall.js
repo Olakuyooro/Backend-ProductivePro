@@ -62,7 +62,7 @@ exports.getStickyWall = async (req, res, next) => {
 exports.deleteSticky = async (req, res, next) => {
   const stickyId = req.params.stickyId;
   try {
-    const sticky = await StickyWall.findById(taskId);
+    const sticky = await StickyWall.findById(stickyId);
     if (!sticky) {
       const error = new Error("Could not find sticky wall.");
       error.statusCode = 404;
@@ -79,7 +79,7 @@ exports.deleteSticky = async (req, res, next) => {
 
     user.stickyWalls.pull(stickyId);
     await user.save();
-    res.status(200).json({ message: "Deleted task." });
+    res.status(200).json({ message: "Deleted sticky." });
   } catch (error) {
     if (!error.statusCode) {
       error.statusCode = 500;

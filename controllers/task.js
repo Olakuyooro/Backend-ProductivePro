@@ -83,7 +83,7 @@ exports.getUpcomingTasks = async (req, res, next) => {
       (task) => task.date.toDateString() === tomorrow.toDateString()
     );
     const nextWeekTasks = tasks.filter(
-      (task) => task.date > tomorrow && task.date <= nextWeek
+      (task) => task.date >= tomorrow && task.date <= nextWeek
     );
 
     const upcomingTasks = tomorrowTasks.concat(todayTasks, nextWeekTasks);

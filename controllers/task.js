@@ -86,7 +86,7 @@ exports.getUpcomingTasks = async (req, res, next) => {
       (task) => task.date > tomorrow && task.date <= nextWeek
     );
 
-    const upcomingTasks =  nextWeekTasks
+    const upcomingTasks = tomorrowTasks.concat(todayTasks, nextWeekTasks);
 
     res.status(200).json({ tasks: upcomingTasks });
   } catch (error) {

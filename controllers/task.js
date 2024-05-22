@@ -76,17 +76,20 @@ exports.getTasks = async (req, res, next) => {
 exports.getUpcomingTasks = async (req, res, next) => {
   try {
     const tasks = await Task.find({ creator: req.userId });
+
     const todayTasks = tasks.filter(
       (task) => task.date.toDateString() === today.toDateString()
     );
+
     const tomorrowTasks = tasks.filter(
       (task) => task.date.toDateString() === tomorrow.toDateString()
     );
+
     const nextWeekTasks = tasks.filter(
-      (task) => task.date >= tomorrow && task.date <= nextWeek
+      (task) => task.date > tomorrow && task.date <= nextWeek
     );
 
-    const upcomingTasks = tomorrowTasks.concat(todayTasks, nextWeekTasks);
+    const upcomingTasks = [...todayTasks, ...tomorrowTasks, ...nextWeekTasks];
 
     res.status(200).json({ tasks: upcomingTasks });
   } catch (error) {
@@ -94,6 +97,7 @@ exports.getUpcomingTasks = async (req, res, next) => {
     res.status(500).json({ error: "An error occurred while fetching tasks" });
   }
 };
+
 
 exports.getTask = async (req, res, next) => {
   try {

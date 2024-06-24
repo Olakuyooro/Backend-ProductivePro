@@ -22,8 +22,12 @@ exports.signup = async (req, res, next) => {
     });
 
     const result = await user.save();
+    const token = jwt.sign(
+      { email: user.email, userId: user._id.toString() },
+      "somesupersecretsecret"
+    );
 
-    res.status(201).json({ message: "User created!", userId: result._id });
+    res.status(201).json({ token, message: "User created!", userId: result._id });
   } catch (err) {
     next(err);
   }
